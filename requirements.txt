@@ -8,14 +8,14 @@ python-pptx>=0.6.21
 
 # OCR and image processing
 easyocr>=1.7.0
-pillow>=10.0.0
-opencv-python>=4.8.0
+pillow>=10.3.0  # Security: Fixed buffer overflow vulnerability
+opencv-python>=4.8.1.78  # Security: Fixed CVE-2023-4863 in bundled libwebp
 
 # Embeddings and vector storage
 sentence-transformers>=2.2.2
 faiss-cpu>=1.7.4
-torch>=2.0.0
-transformers>=4.30.0
+torch>=2.6.0  # Security: Fixed heap buffer overflow, use-after-free, and RCE vulnerabilities
+transformers>=4.48.0  # Security: Fixed deserialization vulnerabilities
 
 # System monitoring
 psutil>=5.9.0
