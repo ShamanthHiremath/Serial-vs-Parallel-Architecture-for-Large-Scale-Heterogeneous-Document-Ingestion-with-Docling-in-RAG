@@ -1,4 +1,4 @@
-# Migration to Docling
+<!-- # Migration to Docling
 
 This document explains the changes made to use Docling as the primary document processing library.
 
@@ -229,4 +229,4 @@ However, we recommend using Docling for better quality and maintainability.
 For issues related to:
 - **Docling library**: Check [Docling GitHub Issues](https://github.com/DS4SD/docling/issues)
 - **Pipeline integration**: Open an issue in this repository
-- **Migration help**: See CONTRIBUTING.md for guidelines
+- **Migration help**: See CONTRIBUTING.md for guidelines -->

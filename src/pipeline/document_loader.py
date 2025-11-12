@@ -6,7 +6,7 @@ from typing import List, Dict, Any
 import logging
 
 try:
-    from docling.document_converter import DocumentConverter
+    from docling.document_converter import DocumentConverter, PdfFormatOption
     from docling.datamodel.base_models import InputFormat
     from docling.datamodel.pipeline_options import PipelineOptions
     DOCLING_AVAILABLE = True
@@ -43,13 +43,15 @@ class DocumentLoader:
         """Initialize Docling DocumentConverter."""
         try:
             # Configure pipeline options
-            pipeline_options = PipelineOptions()
-            pipeline_options.do_ocr = self.use_ocr
-            pipeline_options.do_table_structure = True
+            pipeline_options = PipelineOptions(do_table_structure=True, )
+            # pipeline_options.do_ocr = self.use_ocr
+            # pipeline_options.do_table_structure = True
             
             # Initialize converter with options
             self.converter = DocumentConverter(
-                pipeline_options=pipeline_options
+                 format_options={
+                    InputFormat.PDF: PdfFormatOption(pipeline_options=pipeline_options)
+                }
             )
             logger.info("Docling DocumentConverter initialized successfully")
         except Exception as e:

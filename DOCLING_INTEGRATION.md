@@ -37,8 +37,8 @@ from docling.datamodel.pipeline_options import PipelineOptions
 
 # Configure pipeline
 pipeline_options = PipelineOptions()
-pipeline_options.do_ocr = True  # Enable OCR
-pipeline_options.do_table_structure = True  # Extract tables
+# pipeline_options.do_ocr = True  # Enable OCR
+# pipeline_options.do_table_structure = True  # Extract tables
 
 # Create converter
 converter = DocumentConverter(pipeline_options=pipeline_options)

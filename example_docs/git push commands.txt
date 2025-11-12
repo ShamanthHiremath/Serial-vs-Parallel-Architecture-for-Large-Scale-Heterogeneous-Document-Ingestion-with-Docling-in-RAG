@@ -1,0 +1,7 @@
+echo "# MSRIT_CSE_7th_Sem_Notes" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/ShamanthHiremath/MSRIT_CSE_7th_Sem_Notes.git
+git push -u origin main

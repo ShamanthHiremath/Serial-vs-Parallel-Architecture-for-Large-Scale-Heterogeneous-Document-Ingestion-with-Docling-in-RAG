@@ -1,0 +1,8 @@
+Sample Document
+
+Topic: Machine Learning in Healthcare
+
+This is a test document for the ingestion pipeline.
+Document ID: 1
+
+This is a test document for the ingestion pipeline.
