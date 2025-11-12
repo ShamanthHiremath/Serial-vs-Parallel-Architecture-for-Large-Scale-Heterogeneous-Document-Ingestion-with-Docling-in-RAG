@@ -39,34 +39,44 @@ This document describes the architecture and design decisions of the Document In
 
 ### 1. Document Loader (`document_loader.py`)
 
-**Purpose**: Load and extract text from various document formats
+**Purpose**: Load and extract text from various document formats using Docling
 
 **Supported Formats**:
-- PDF: PyPDF2 for text extraction
-- DOCX: python-docx for Word documents
-- PPTX: python-pptx for PowerPoint presentations
-- Images: PIL for image validation (requires OCR)
+- PDF: Docling handles both text-based and scanned PDFs with built-in OCR
+- DOCX: Docling's native Word document processing
+- PPTX: Docling's native PowerPoint processing
+- HTML: Web pages and HTML documents
+- Markdown: Markdown files
+- Images: PIL for image validation, Docling for OCR
 
-**Design Pattern**: Strategy pattern for different file type handlers
+**Design Pattern**: Unified processing through Docling's DocumentConverter
 
 **Key Methods**:
-- `load_document()`: Main entry point for loading a document
+- `load_document()`: Main entry point using Docling's converter
 - `find_documents()`: Recursively find documents in a directory
-- `_load_pdf()`, `_load_docx()`, etc.: Format-specific loaders
+- `_initialize_converter()`: Set up Docling's DocumentConverter with OCR options
+- `_load_image_fallback()`: Fallback for images when Docling is unavailable
+
+**Docling Integration**:
+- Uses `DocumentConverter` for unified document processing
+- Configurable `PipelineOptions` for OCR and table structure
+- Exports to Markdown format for text extraction
+- Automatic format detection and handling
 
 ### 2. OCR Processor (`ocr_processor.py`)
 
-**Purpose**: Extract text from images and scanned documents using EasyOCR
+**Purpose**: Provide additional OCR processing beyond Docling's built-in OCR using EasyOCR
 
 **Features**:
 - GPU acceleration support (CUDA)
 - Multi-language support (default: English)
-- Batch processing capability
+- Supplementary OCR for enhanced accuracy
 
 **Design Considerations**:
 - Lazy initialization of EasyOCR reader (expensive operation)
 - Configurable device (CPU/GPU)
 - Error handling for corrupted images
+- Works alongside Docling's OCR for maximum coverage
 
 ### 3. Embedding Processor (`embedding_processor.py`)
 

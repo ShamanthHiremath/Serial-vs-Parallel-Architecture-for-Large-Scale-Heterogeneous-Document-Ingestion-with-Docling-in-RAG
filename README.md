@@ -1,11 +1,12 @@
 # Serial vs Parallel Document Ingestion Benchmark
 
-A modular Python pipeline to benchmark **serial vs parallel document ingestion** using Docling for RAG (Retrieval-Augmented Generation) pipelines. This tool helps you analyze performance differences between sequential and parallel processing of heterogeneous document corpora.
+A modular Python pipeline to benchmark **serial vs parallel document ingestion** using **Docling** for RAG (Retrieval-Augmented Generation) pipelines. This tool helps you analyze performance differences between sequential and parallel processing of heterogeneous document corpora.
 
 ## Features
 
-- **Multi-format Support**: PDF, DOCX, PPTX, and image files (JPG, PNG, BMP, TIFF)
-- **GPU-Accelerated OCR**: Uses EasyOCR with CUDA support for image and scanned document processing
+- **Unified Document Processing with Docling**: Single library handles PDF, DOCX, PPTX, HTML, Markdown, and images
+- **Built-in OCR**: Docling's integrated OCR for scanned documents and images
+- **GPU-Accelerated OCR**: Uses EasyOCR with CUDA support for additional OCR processing
 - **Sentence Embeddings**: Leverages sentence-transformers for high-quality document embeddings
 - **FAISS Indexing**: Efficient vector storage and similarity search
 - **Comprehensive Metrics**: 
@@ -20,8 +21,8 @@ A modular Python pipeline to benchmark **serial vs parallel document ingestion**
 
 The pipeline consists of modular components:
 
-1. **DocumentLoader**: Extracts text from various document formats
-2. **OCRProcessor**: Applies EasyOCR to images and scanned documents
+1. **DocumentLoader**: Uses Docling to extract text from various document formats (PDF, DOCX, PPTX, HTML, MD, images)
+2. **OCRProcessor**: Applies EasyOCR for additional OCR processing beyond Docling's built-in capabilities
 3. **EmbeddingProcessor**: Generates embeddings using sentence-transformers
 4. **FAISSIndexer**: Builds and manages vector index
 5. **MetricsCollector**: Tracks performance and resource metrics
@@ -175,9 +176,12 @@ Results are saved in the specified output directory:
 
 ## Supported File Formats
 
-- **PDF**: Extracted text or OCR for scanned PDFs
+Docling provides unified processing for:
+- **PDF**: Text extraction and OCR for scanned PDFs
 - **DOCX**: Microsoft Word documents
 - **PPTX**: PowerPoint presentations
+- **HTML**: Web pages and HTML documents
+- **Markdown**: Markdown files
 - **Images**: JPG, JPEG, PNG, BMP, TIFF (processed with OCR)
 
 ## Troubleshooting

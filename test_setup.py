@@ -77,9 +77,7 @@ def test_dependencies():
     print("\nTesting dependencies...")
     
     dependencies = [
-        ('docx', 'python-docx'),
-        ('PyPDF2', 'PyPDF2'),
-        ('pptx', 'python-pptx'),
+        ('docling', 'docling'),
         ('PIL', 'Pillow'),
         ('easyocr', 'easyocr'),
         ('sentence_transformers', 'sentence-transformers'),

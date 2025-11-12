@@ -84,10 +84,13 @@ This repository contains a complete, production-ready modular Python pipeline fo
 ## Key Features
 
 ### ✅ Document Processing
-- PDF text extraction and OCR for scanned PDFs
-- Microsoft Word (DOCX) document parsing
-- PowerPoint (PPTX) presentation parsing
-- Image file processing (JPG, PNG, BMP, TIFF) with OCR
+- Unified document processing through Docling library
+- PDF text extraction and OCR for scanned PDFs  
+- Microsoft Word (DOCX) document parsing via Docling
+- PowerPoint (PPTX) presentation parsing via Docling
+- HTML and Markdown document support
+- Image file processing (JPG, PNG, BMP, TIFF) with Docling's OCR
+- Additional EasyOCR support for enhanced accuracy
 
 ### ✅ GPU Acceleration
 - CUDA support for OCR processing

@@ -1,15 +1,15 @@
 # Document Ingestion Pipeline Dependencies
 
-# Core document processing
-docling>=1.0.0
-python-docx>=0.8.11
-pypdf2>=3.0.0
-python-pptx>=0.6.21
+# Core document processing - Docling handles PDF, DOCX, PPTX, HTML, Markdown, images
+docling>=1.0.0  # Unified document processing library
+docling-core>=1.0.0  # Core Docling functionality
 
-# OCR and image processing
-easyocr>=1.7.0
+# Image processing (used by Docling and for validation)
 pillow>=10.3.0  # Security: Fixed buffer overflow vulnerability
 opencv-python>=4.8.1.78  # Security: Fixed CVE-2023-4863 in bundled libwebp
+
+# OCR (optional - for additional OCR processing beyond Docling's built-in OCR)
+easyocr>=1.7.0
 
 # Embeddings and vector storage
 sentence-transformers>=2.2.2

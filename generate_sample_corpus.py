@@ -6,45 +6,48 @@ Creates a small corpus with different document types.
 
 import os
 from pathlib import Path
-from docx import Document
-from pptx import Presentation
-from pptx.util import Inches, Pt
 from PIL import Image, ImageDraw, ImageFont
 import argparse
 
 
-def create_sample_docx(output_dir: Path, filename: str, content: str):
-    """Create a sample DOCX file."""
-    doc = Document()
-    doc.add_heading('Sample Document', 0)
-    doc.add_paragraph(content)
-    doc.add_paragraph('This is a test document for the ingestion pipeline.')
-    
+def create_sample_text(output_dir: Path, filename: str, content: str, format_type: str = 'txt'):
+    """Create a sample text file (txt, md, or html)."""
     filepath = output_dir / filename
-    doc.save(filepath)
-    print(f"Created: {filepath}")
+    
+    if format_type == 'html':
+        html_content = f"""<!DOCTYPE html>
+<html>
+<head>
+    <title>Sample Document</title>
+</head>
+<body>
+    <h1>Sample Document</h1>
+    <p>{content}</p>
+    <p>This is a test document for the ingestion pipeline.</p>
+</body>
+</html>"""
+        with open(filepath, 'w') as f:
+            f.write(html_content)
+    elif format_type == 'md':
+        md_content = f"""# Sample Document
 
+{content}
 
-def create_sample_pptx(output_dir: Path, filename: str, content: str):
-    """Create a sample PPTX file."""
-    prs = Presentation()
+This is a test document for the ingestion pipeline.
+
+## Features
+- Markdown support
+- Easy to read
+- Lightweight
+"""
+        with open(filepath, 'w') as f:
+            f.write(md_content)
+    else:  # txt
+        with open(filepath, 'w') as f:
+            f.write(f"Sample Document\n\n")
+            f.write(f"{content}\n\n")
+            f.write(f"This is a test document for the ingestion pipeline.\n")
     
-    # Slide 1
-    slide = prs.slides.add_slide(prs.slide_layouts[0])
-    title = slide.shapes.title
-    subtitle = slide.placeholders[1]
-    title.text = "Sample Presentation"
-    subtitle.text = content
-    
-    # Slide 2
-    slide = prs.slides.add_slide(prs.slide_layouts[1])
-    title = slide.shapes.title
-    body = slide.placeholders[1]
-    title.text = "Content Slide"
-    body.text = "This is a test presentation for the ingestion pipeline."
-    
-    filepath = output_dir / filename
-    prs.save(filepath)
     print(f"Created: {filepath}")
 
 
@@ -67,22 +70,6 @@ def create_sample_image(output_dir: Path, filename: str, text: str):
     filepath = output_dir / filename
     img.save(filepath)
     print(f"Created: {filepath}")
-
-
-def create_sample_pdf_text(output_dir: Path, filename: str, content: str):
-    """Create a simple text file (will be converted to PDF manually or used as-is)."""
-    # Note: Creating a real PDF requires additional libraries
-    # For testing, we'll create a text file with .txt extension
-    # Users can manually convert to PDF or we can add reportlab dependency
-    filepath = output_dir / filename.replace('.pdf', '.txt')
-    
-    with open(filepath, 'w') as f:
-        f.write(f"Sample PDF Document\n\n")
-        f.write(f"{content}\n\n")
-        f.write(f"This is a test document for the ingestion pipeline.\n")
-    
-    print(f"Created text file: {filepath}")
-    print(f"Note: Install reportlab and run with --create-pdf to generate actual PDFs")
 
 
 def main():
@@ -131,20 +118,32 @@ def main():
     for i in range(min(args.count, len(topics))):
         topic = topics[i]
         
-        # Create DOCX
-        create_sample_docx(
+        # Create HTML files
+        create_sample_text(
             output_dir,
-            f'document_{i+1}.docx',
+            f'document_{i+1}.html',
             f'This document discusses {topic}. '
             f'It contains important information about the subject matter. '
-            f'Document ID: {i+1}'
+            f'Document ID: {i+1}',
+            'html'
         )
         
-        # Create PPTX
-        create_sample_pptx(
+        # Create Markdown files
+        create_sample_text(
             output_dir,
-            f'presentation_{i+1}.pptx',
-            f'Topic: {topic}'
+            f'document_{i+1}.md',
+            f'This document discusses {topic}. '
+            f'It contains important information about the subject matter. '
+            f'Document ID: {i+1}',
+            'md'
+        )
+        
+        # Create text files
+        create_sample_text(
+            output_dir,
+            f'document_{i+1}.txt',
+            f'Topic: {topic}\n\nThis is a test document for the ingestion pipeline.\nDocument ID: {i+1}',
+            'txt'
         )
         
         # Create Image
@@ -152,13 +151,6 @@ def main():
             output_dir,
             f'image_{i+1}.png',
             f'{topic}'
-        )
-        
-        # Create text file (placeholder for PDF)
-        create_sample_pdf_text(
-            output_dir,
-            f'document_{i+1}.pdf',
-            f'This document discusses {topic}.'
         )
     
     print()
