@@ -1,0 +1,31 @@
+# Document Ingestion Pipeline Dependencies
+
+# Core document processing
+docling>=1.0.0
+python-docx>=0.8.11
+pypdf2>=3.0.0
+python-pptx>=0.6.21
+
+# OCR and image processing
+easyocr>=1.7.0
+pillow>=10.0.0
+opencv-python>=4.8.0
+
+# Embeddings and vector storage
+sentence-transformers>=2.2.2
+faiss-cpu>=1.7.4
+torch>=2.0.0
+transformers>=4.30.0
+
+# System monitoring
+psutil>=5.9.0
+py3nvml>=0.2.7
+GPUtil>=1.4.0
+
+# Data handling and CLI
+pandas>=2.0.0
+numpy>=1.24.0
+tqdm>=4.65.0
+
+# Async/parallel processing
+aiofiles>=23.0.0
